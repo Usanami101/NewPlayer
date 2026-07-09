@@ -68,7 +68,7 @@ Worldwide **free internet radio** with a wood-cabinet dial UI. Filter by **genre
 
 ```bash
 # Clone
-git clone https://github.com/YOUR_USERNAME/NewPlayer.git
+git clone https://github.com/Usanami101/NewPlayer.git
 cd NewPlayer
 
 # Install

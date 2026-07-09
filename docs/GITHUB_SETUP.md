@@ -18,7 +18,7 @@ In PowerShell:
 ```powershell
 cd C:\Users\ad521\NewTube
 
-git remote add origin https://github.com/YOUR_USERNAME/NewPlayer.git
+git remote add origin https://github.com/Usanami101/NewPlayer.git
 git branch -M main
 git push -u origin main
 ```
