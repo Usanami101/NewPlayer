@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="assets/icon.png" alt="NewPlayer" width="120" height="120" />
+  <img src="docs/social-preview.png" alt="NewPlayer — five apps in one" width="100%" />
+</p>
+
+<p align="center">
+  <img src="assets/icon.png" alt="NewPlayer logo" width="96" height="96" />
 </p>
 
 <h1 align="center">NewPlayer</h1>
