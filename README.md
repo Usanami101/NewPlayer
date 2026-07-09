@@ -52,7 +52,20 @@ Worldwide **free internet radio** with a wood-cabinet dial UI. Filter by **genre
 
 ## Screenshots
 
-*Add screenshots to `docs/screenshots/` after your first release and link them here.*
+<p align="center">
+  <img src="docs/screenshots/00-hero-grid.jpg" alt="NewPlayer modes overview" width="100%" />
+</p>
+
+| | |
+|:--:|:--:|
+| ![Home](docs/screenshots/01-home.jpg) | ![NewTube](docs/screenshots/02-newtube.jpg) |
+| **Home** | **NewTube** |
+| ![Settings](docs/screenshots/03-settings.jpg) | ![NewTV](docs/screenshots/04-newtv.jpg) |
+| **Settings** | **NewTV** |
+| ![NewRadio](docs/screenshots/05-newradio.jpg) | ![NewWeather](docs/screenshots/06-newweather.jpg) |
+| **NewRadio** | **NewWeather** |
+| ![New(s)](docs/screenshots/07-news.jpg) | |
+| **New(s)** | |
 
 ---
 
