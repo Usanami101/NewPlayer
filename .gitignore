@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+
+# Build / release binaries (publish via GitHub Releases)
+dist/
+release/*.exe
+release/*.blockmap
+release/VERSION.txt
+*.exe
+*.blockmap
+
+# Keep release readme
+!release/README.txt
+
+# Logs & caches
+*.log
+npm-debug.log*
+.npm
+.cache/
+.eslintcache
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Editors / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Electron
+out/
+*.asar.unpacked/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Local backups
+*.bak
+src/renderer/newweather.html.bak
+
+# Package manager noise
+.yarn/
+.pnpm-store/

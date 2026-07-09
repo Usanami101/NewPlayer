@@ -1,0 +1,118 @@
+{
+  "name": "newplayer",
+  "productName": "NewPlayer",
+  "version": "2.0.0",
+  "description": "NewPlayer — NewTube, NewTV, NewRadio, NewWeather, and New(s) in one Windows app.",
+  "main": "src/main/main.js",
+  "author": {
+    "name": "NewPlayer",
+    "email": "support@newplayer.local"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/NewPlayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/NewPlayer/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/NewPlayer#readme",
+  "keywords": [
+    "newplayer",
+    "newtube",
+    "newtv",
+    "newradio",
+    "newweather",
+    "electron",
+    "youtube-tv",
+    "iptv",
+    "radio",
+    "nws",
+    "windows"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "assets:installer": "python build/make-installer-assets.py",
+    "build": "npm run assets:installer && electron-builder --win",
+    "build:installer": "npm run assets:installer && electron-builder --win nsis",
+    "build:portable": "electron-builder --win portable",
+    "build:dir": "electron-builder --win dir",
+    "dist": "npm run build && node build/stage-release.js"
+  },
+  "build": {
+    "appId": "com.newplayer.app",
+    "productName": "NewPlayer",
+    "copyright": "Copyright © 2026 NewPlayer",
+    "executableName": "NewPlayer",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json",
+      "LICENSE.txt"
+    ],
+    "extraMetadata": {
+      "name": "newplayer",
+      "productName": "NewPlayer"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "legalTrademarks": "NewPlayer",
+      "requestedExecutionLevel": "asInvoker",
+      "signAndEditExecutable": true,
+      "verifyUpdateCodeSignature": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "NewPlayer",
+      "menuCategory": false,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "installerHeader": "build/installerHeader.bmp",
+      "installerSidebar": "build/installerSidebar.bmp",
+      "uninstallerSidebar": "build/uninstallerSidebar.bmp",
+      "license": "LICENSE.txt",
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "unicode": true,
+      "warningsAsErrors": false,
+      "include": "build/installer.nsh",
+      "displayLanguageSelector": false,
+      "artifactName": "NewPlayer-Setup-${version}-${arch}.${ext}",
+      "uninstallDisplayName": "NewPlayer",
+      "guid": "B8D4F02C-5E3E-4B9F-8C2D-7E9F1A2B3C4D"
+    },
+    "portable": {
+      "artifactName": "NewPlayer-Portable-${version}-${arch}.${ext}",
+      "requestExecutionLevel": "user"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0",
+    "hls.js": "^1.5.17"
+  }
+}

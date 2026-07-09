@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:;" />
+  <title>NewPlayer</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <header class="top">
+    <div class="brand">
+      <div class="mark">▶</div>
+      <div>
+        <h1>NewPlayer</h1>
+        <p>Tube · TV · Radio · NewWeather · New(s)</p>
+      </div>
+    </div>
+    <button type="button" class="ghost" id="btnSettings" title="Settings">⚙ Settings</button>
+  </header>
+
+  <main class="cards cards-4">
+    <button type="button" class="card tube" data-mode="newtube" id="cardTube">
+      <div class="card-icon">▶</div>
+      <h2>NewTube</h2>
+      <p>YouTube TV experience with Ad Shield, Multi Desk, and deep settings.</p>
+      <span class="go">Open →</span>
+    </button>
+
+    <button type="button" class="card tv" data-mode="newtv" id="cardTv">
+      <div class="card-icon">📡</div>
+      <h2>NewTV</h2>
+      <p>IPTV from countries worldwide. Filter by genre, sports, news, movies & favorites.</p>
+      <span class="go">Open →</span>
+    </button>
+
+    <button type="button" class="card musi" data-mode="newradio" id="cardRadio">
+      <div class="card-icon">📻</div>
+      <h2>NewRadio</h2>
+      <p>Worldwide free radio with dials — filter by genre, country, faith, language.</p>
+      <span class="go">Tune in →</span>
+    </button>
+
+    <button type="button" class="card weather" data-mode="newweather" id="cardWeather">
+      <div class="card-icon">🌤</div>
+      <h2>NewWeather</h2>
+      <p>NWS forecast &amp; full-screen TV-style EAS severe alerts. Tray background mode.</p>
+      <span class="go">Open →</span>
+    </button>
+
+    <button type="button" class="card news" data-mode="news" id="cardNews">
+      <div class="card-icon">📰</div>
+      <h2>New(s)</h2>
+      <p>Worldwide headlines from major free RSS sources — world, tech, sports, science.</p>
+      <span class="go">Open →</span>
+    </button>
+  </main>
+
+  <footer class="foot">
+    <label class="remember">
+      <input type="checkbox" id="rememberMode" />
+      Remember my choice next time
+    </label>
+    <span class="hint">Free public streams · not affiliated with YouTube / broadcasters</span>
+  </footer>
+
+  <script src="home.js"></script>
+</body>
+</html>

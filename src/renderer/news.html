@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; connect-src 'self' https:;" />
+  <title>New(s) — NewPlayer</title>
+  <link rel="stylesheet" href="news.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="side-head">
+        <button type="button" class="back" id="btnHome">←</button>
+        <div>
+          <strong>New(s)</strong>
+          <small>Worldwide headlines</small>
+        </div>
+      </div>
+      <input id="search" type="search" placeholder="Search headlines…" />
+      <button type="button" class="region active" data-region="all">All regions</button>
+      <div id="regionList" class="region-list"></div>
+      <div class="feeds-label">Sources</div>
+      <div id="feedList" class="feed-list"></div>
+    </aside>
+    <main class="main">
+      <header class="main-head">
+        <div>
+          <h1 id="viewTitle">World news</h1>
+          <p id="viewSub">Free public RSS · tap a story to open</p>
+        </div>
+        <button type="button" class="btn" id="btnRefresh">Refresh</button>
+      </header>
+      <div id="list" class="list"></div>
+    </main>
+  </div>
+  <script src="news.js"></script>
+</body>
+</html>

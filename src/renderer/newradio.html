@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https: http:; media-src 'self' blob: https: http:; connect-src 'self' https: http:;" />
+  <title>NewRadio — NewPlayer</title>
+  <link rel="stylesheet" href="newradio.css" />
+</head>
+<body>
+  <div class="wood">
+    <header class="top-rail">
+      <button type="button" class="pill-btn" id="btnHome">← Home</button>
+      <div class="brand-block">
+        <div class="brand-badge">FM · AM · NET</div>
+        <h1>NewRadio</h1>
+        <p id="statusLine">Tune the dials · 30,000+ free stations</p>
+      </div>
+      <div class="top-pills">
+        <button type="button" class="pill-btn" id="btnFavView">★ Favorites</button>
+        <button type="button" class="pill-btn" id="btnTop">Top hits</button>
+      </div>
+    </header>
+
+    <!-- Radio faceplate -->
+    <section class="radio-face">
+      <div class="speaker-grill left" aria-hidden="true"></div>
+
+      <div class="center-panel">
+        <div class="freq-window">
+          <div class="freq-glass">
+            <div class="freq-scale" id="freqScale"></div>
+            <div class="needle" id="needle"></div>
+          </div>
+          <div class="lcd">
+            <div class="lcd-row">
+              <span class="lcd-label">NOW TUNED</span>
+              <span class="lcd-live" id="liveDot">● ON AIR</span>
+            </div>
+            <div class="lcd-title" id="trackName">— Select a station —</div>
+            <div class="lcd-meta" id="trackMeta">Genre · Country · Bitrate</div>
+          </div>
+        </div>
+
+        <div class="dial-row">
+          <div class="dial-wrap">
+            <button type="button" class="dial" id="dialGenre" title="Genre">
+              <span class="dial-ring"></span>
+              <span class="dial-knob"></span>
+              <span class="dial-mark"></span>
+            </button>
+            <div class="dial-caption">GENRE</div>
+            <div class="dial-value" id="valGenre">All</div>
+          </div>
+          <div class="dial-wrap">
+            <button type="button" class="dial" id="dialCountry" title="Country">
+              <span class="dial-ring"></span>
+              <span class="dial-knob"></span>
+              <span class="dial-mark"></span>
+            </button>
+            <div class="dial-caption">COUNTRY</div>
+            <div class="dial-value" id="valCountry">World</div>
+          </div>
+          <div class="dial-wrap">
+            <button type="button" class="dial accent" id="dialReligion" title="Religion">
+              <span class="dial-ring"></span>
+              <span class="dial-knob"></span>
+              <span class="dial-mark"></span>
+            </button>
+            <div class="dial-caption">FAITH</div>
+            <div class="dial-value" id="valReligion">Any</div>
+          </div>
+          <div class="dial-wrap">
+            <button type="button" class="dial" id="dialLang" title="Language">
+              <span class="dial-ring"></span>
+              <span class="dial-knob"></span>
+              <span class="dial-mark"></span>
+            </button>
+            <div class="dial-caption">LANGUAGE</div>
+            <div class="dial-value" id="valLang">Any</div>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <button type="button" class="radio-key" id="btnPrev" title="Previous">⏮</button>
+          <button type="button" class="radio-key play" id="btnPlay" title="Play / Pause">▶</button>
+          <button type="button" class="radio-key" id="btnNext" title="Next">⏭</button>
+          <button type="button" class="radio-key" id="btnFav" title="Favorite">☆</button>
+          <div class="vol-block">
+            <span>VOL</span>
+            <input id="volume" type="range" min="0" max="100" value="85" />
+          </div>
+          <div class="eq-bars" id="eq" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaker-grill right" aria-hidden="true"></div>
+    </section>
+
+    <!-- Filter chips + search -->
+    <section class="tuner-bar">
+      <input id="search" type="search" placeholder="Search station name…" spellcheck="false" />
+      <div class="chip-scroll" id="genreChips"></div>
+    </section>
+
+    <section class="station-board">
+      <div class="board-head">
+        <h2 id="listTitle">Station presets</h2>
+        <span id="listCount">—</span>
+      </div>
+      <div id="stationGrid" class="preset-grid"></div>
+    </section>
+  </div>
+
+  <!-- Dial picker modal -->
+  <div id="picker" class="picker hidden">
+    <div class="picker-card">
+      <header>
+        <h3 id="pickerTitle">Select</h3>
+        <button type="button" class="pill-btn" id="pickerClose">✕</button>
+      </header>
+      <input id="pickerSearch" type="search" placeholder="Filter…" />
+      <div id="pickerList" class="picker-list"></div>
+    </div>
+  </div>
+
+  <audio id="audio" preload="none"></audio>
+  <script src="newradio.js"></script>
+</body>
+</html>

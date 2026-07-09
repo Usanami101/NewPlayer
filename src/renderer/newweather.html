@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https:; connect-src 'self' https:;" />
+  <title>NewWeather — NewPlayer</title>
+  <link rel="stylesheet" href="newweather.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <button type="button" class="back" id="btnHome">←</button>
+      <div class="titles">
+        <h1>NewWeather</h1>
+        <p id="locLabel">National Weather Service · EAS ready</p>
+      </div>
+      <div class="top-actions">
+        <button type="button" class="btn" id="btnTestEAS" title="Test full-screen EAS">Test EAS</button>
+        <button type="button" class="btn" id="btnRefresh">Refresh</button>
+        <button type="button" class="btn primary" id="btnBg">Background alerts</button>
+      </div>
+    </header>
+
+    <section class="setup" id="setupPanel">
+      <h2>Your location (US)</h2>
+      <p class="hint">NewWeather uses the National Weather Service. Enter a ZIP code or coordinates. Severe alerts can take over the screen with a TV-style EAS warning.</p>
+      <div class="row">
+        <label>ZIP code
+          <input id="zip" type="text" inputmode="numeric" maxlength="10" placeholder="e.g. 10001" />
+        </label>
+        <label>Latitude
+          <input id="lat" type="number" step="0.0001" placeholder="optional" />
+        </label>
+        <label>Longitude
+          <input id="lon" type="number" step="0.0001" placeholder="optional" />
+        </label>
+      </div>
+      <div class="row checks">
+        <label><input type="checkbox" id="alertsOn" checked /> Severe weather alerts</label>
+        <label><input type="checkbox" id="bgOn" /> Keep running in tray for alerts only</label>
+        <label><input type="checkbox" id="easOn" checked /> Full-screen EAS takeover</label>
+      </div>
+      <div class="row">
+        <label>Minimum alert severity
+          <select id="minSev">
+            <option value="Minor">Minor+</option>
+            <option value="Moderate" selected>Moderate+</option>
+            <option value="Severe">Severe+</option>
+            <option value="Extreme">Extreme only</option>
+          </select>
+        </label>
+        <label>EAS takeover from
+          <select id="easMin">
+            <option value="Moderate">Moderate+</option>
+            <option value="Severe" selected>Severe+</option>
+            <option value="Extreme">Extreme only</option>
+          </select>
+        </label>
+        <label>Poll every (minutes)
+          <input id="pollMin" type="number" min="1" max="60" value="3" />
+        </label>
+      </div>
+      <button type="button" class="btn primary" id="btnSave">Save &amp; load NewWeather</button>
+      <p class="status" id="setupStatus"></p>
+    </section>
+
+    <section class="dash hidden" id="dash">
+      <div class="now card" id="nowCard">
+        <div class="now-main">
+          <div class="temp" id="temp">--°</div>
+          <div>
+            <div class="short" id="short">—</div>
+            <div class="meta" id="nowMeta"></div>
+          </div>
+        </div>
+        <p class="detail" id="detail"></p>
+      </div>
+
+      <div class="alerts card" id="alertsCard">
+        <h3>Active NWS alerts</h3>
+        <div id="alertsList" class="alerts-list"></div>
+      </div>
+
+      <div class="periods card">
+        <h3>Forecast</h3>
+        <div id="periodList" class="period-list"></div>
+      </div>
+
+      <div class="hourly card">
+        <h3>Next hours</h3>
+        <div id="hourlyList" class="hourly-list"></div>
+      </div>
+
+      <p class="footer-note">NewWeather · National Weather Service (weather.gov) · Updated <span id="updated">—</span></p>
+    </section>
+  </div>
+  <script src="newweather.js"></script>
+</body>
+</html>

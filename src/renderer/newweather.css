@@ -1,0 +1,109 @@
+:root {
+  --bg: #071018;
+  --panel: #0e1a28;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.1);
+  --text: #e8f1ff;
+  --muted: #8ba3bf;
+  --accent: #38bdf8;
+  --warn: #fbbf24;
+  --severe: #f97316;
+  --extreme: #ef4444;
+  --font: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); overflow: hidden; }
+.hidden { display: none !important; }
+.app { height: 100%; display: flex; flex-direction: column; }
+.top {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0f2438, #0a1826);
+  -webkit-app-region: drag;
+}
+.top button, .top-actions { -webkit-app-region: no-drag; }
+.titles { flex: 1; min-width: 0; }
+.titles h1 { font-size: 1.25rem; letter-spacing: -0.03em; }
+.titles p { color: var(--muted); font-size: 0.82rem; }
+.top-actions { display: flex; gap: 8px; }
+.back, .btn {
+  border: 1px solid var(--border); background: rgba(255,255,255,0.05);
+  color: var(--text); border-radius: 10px; cursor: pointer; font: inherit;
+  padding: 8px 12px;
+}
+.back { width: 40px; height: 40px; padding: 0; }
+.btn.primary { background: rgba(56,189,248,0.2); border-color: rgba(56,189,248,0.4); }
+.btn.active { background: rgba(56,189,248,0.35); }
+
+.setup {
+  padding: 20px; max-width: 720px; overflow: auto;
+}
+.setup h2 { margin-bottom: 6px; }
+.hint, .status { color: var(--muted); font-size: 0.88rem; margin-bottom: 14px; }
+.row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin-bottom: 14px;
+}
+.row.checks { grid-template-columns: 1fr 1fr; }
+label { display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem; color: var(--muted); }
+.checks label { flex-direction: row; align-items: center; color: var(--text); font-size: 0.9rem; }
+input, select {
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border);
+  background: #07101a; color: var(--text); font: inherit; outline: none;
+}
+input:focus, select:focus { border-color: rgba(56,189,248,0.5); }
+
+.dash {
+  flex: 1; min-height: 0; overflow: auto;
+  padding: 16px; display: grid; gap: 14px;
+  grid-template-columns: 1.2fr 1fr;
+  align-content: start;
+}
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 16px;
+}
+.now { grid-column: 1 / -1; }
+.now-main { display: flex; gap: 18px; align-items: center; }
+.temp { font-size: 3.4rem; font-weight: 750; letter-spacing: -0.04em; color: var(--accent); }
+.short { font-size: 1.25rem; font-weight: 650; }
+.meta, .detail { color: var(--muted); margin-top: 6px; font-size: 0.9rem; line-height: 1.4; }
+.alerts { grid-column: 1 / -1; }
+.alerts h3, .periods h3, .hourly h3 { margin-bottom: 10px; font-size: 0.95rem; }
+.alert-item {
+  border-left: 4px solid var(--warn);
+  background: rgba(0,0,0,0.25);
+  border-radius: 10px; padding: 12px; margin-bottom: 8px;
+}
+.alert-item.Severe { border-left-color: var(--severe); }
+.alert-item.Extreme { border-left-color: var(--extreme); }
+.alert-item.Moderate { border-left-color: var(--warn); }
+.alert-item .ev { font-weight: 700; }
+.alert-item .hd { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+.alert-item .area { font-size: 0.75rem; color: var(--muted); margin-top: 6px; }
+.empty-alerts { color: var(--muted); font-size: 0.9rem; }
+
+.period-list { display: grid; gap: 8px; max-height: 420px; overflow: auto; }
+.period {
+  display: grid; grid-template-columns: 1fr auto; gap: 8px;
+  padding: 10px; border-radius: 10px; background: rgba(0,0,0,0.2);
+}
+.period .n { font-weight: 650; font-size: 0.9rem; }
+.period .s { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+.period .t { font-size: 1.2rem; font-weight: 700; color: var(--accent); }
+
+.hourly-list {
+  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px;
+}
+.hour {
+  min-width: 72px; text-align: center; padding: 10px 8px;
+  border-radius: 12px; background: rgba(0,0,0,0.22); font-size: 0.78rem;
+}
+.hour .ht { font-weight: 700; font-size: 1rem; color: var(--accent); margin: 6px 0; }
+.footer-note {
+  grid-column: 1 / -1; color: var(--muted); font-size: 0.75rem;
+}
+@media (max-width: 900px) {
+  .dash { grid-template-columns: 1fr; }
+  .row { grid-template-columns: 1fr; }
+}

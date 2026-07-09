@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data: https: http:; media-src 'self' blob: https: http:; connect-src 'self' https: http:;" />
+  <title>NewTV — NewPlayer</title>
+  <link rel="stylesheet" href="newtv.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="side-head">
+        <button type="button" class="back" id="btnHome" title="Home">←</button>
+        <div>
+          <strong>NewTV</strong>
+          <small>IPTV · free public streams</small>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button type="button" class="tab active" data-tab="countries">Countries</button>
+        <button type="button" class="tab" data-tab="genres">Genres</button>
+        <button type="button" class="tab" data-tab="favorites">Favorites</button>
+        <button type="button" class="tab" data-tab="custom">M3U</button>
+      </div>
+
+      <input id="search" type="search" placeholder="Search channels…" />
+
+      <div class="filters">
+        <select id="quality">
+          <option value="all">All qualities</option>
+          <option value="uhd">4K / UHD</option>
+          <option value="fhd">1080p</option>
+          <option value="hd">HD+</option>
+        </select>
+      </div>
+
+      <div id="browseList" class="browse-list"></div>
+    </aside>
+
+    <section class="main">
+      <div class="player-wrap">
+        <video id="video" controls playsinline></video>
+        <div id="nowPlaying" class="now-playing">Select a channel</div>
+        <div id="playerStatus" class="status"></div>
+      </div>
+
+      <div class="channel-bar">
+        <div class="channel-meta">
+          <img id="chLogo" alt="" hidden />
+          <div>
+            <h2 id="chName">No channel</h2>
+            <p id="chGroup"></p>
+          </div>
+        </div>
+        <div class="channel-actions">
+          <button type="button" id="btnFav" class="btn">☆ Favorite</button>
+          <button type="button" id="btnReload" class="btn">Reload list</button>
+        </div>
+      </div>
+
+      <div id="channelGrid" class="channel-grid"></div>
+    </section>
+  </div>
+
+  <div id="customModal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Custom M3U playlist</h3>
+      <p>Paste a public .m3u / .m3u8 URL</p>
+      <input id="customUrl" type="url" placeholder="https://example.com/playlist.m3u" />
+      <div class="modal-actions">
+        <button type="button" id="customCancel" class="btn">Cancel</button>
+        <button type="button" id="customLoad" class="btn primary">Load</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/hls.min.js"></script>
+  <script src="newtv.js"></script>
+</body>
+</html>

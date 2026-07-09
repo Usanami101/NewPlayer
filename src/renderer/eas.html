@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <title>EMERGENCY ALERT SYSTEM</title>
+  <link rel="stylesheet" href="eas.css" />
+</head>
+<body>
+  <div id="screen" class="eas-screen" aria-live="assertive" role="alert">
+    <div class="bar bar-top"></div>
+    <div class="bar bar-mid-label">
+      <span class="eas-title">EMERGENCY ALERT SYSTEM</span>
+    </div>
+    <div class="bar bar-sub"></div>
+
+    <div class="body">
+      <div class="origin-line" id="originLine">THE NATIONAL WEATHER SERVICE</div>
+      <div class="event-line" id="eventLine">HAS ISSUED A WEATHER ALERT</div>
+      <div class="area-line" id="areaLine">FOR YOUR AREA</div>
+
+      <div class="divider"></div>
+
+      <div class="message" id="message"></div>
+      <div class="instruction" id="instruction"></div>
+
+      <div class="meta" id="meta"></div>
+    </div>
+
+    <div class="bar bar-bottom"></div>
+    <div class="footer">
+      <span id="footerLeft">NWS · IPAWS STYLE DISPLAY</span>
+      <button type="button" class="dismiss-btn hidden" id="btnDismiss">DISMISS ALERT</button>
+      <span id="footerRight">CLOSABLE AFTER 30s OR WHEN SPEECH ENDS</span>
+    </div>
+    <div class="hold-meter" id="holdMeter"><div class="hold-fill" id="holdFill"></div></div>
+  </div>
+  <script src="eas.js"></script>
+</body>
+</html>

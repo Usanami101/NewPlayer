@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <title>NewTube Player</title>
+  <link rel="stylesheet" href="player.css" />
+</head>
+<body>
+  <header class="chrome" id="chrome">
+    <div class="drag">
+      <span class="logo"></span>
+      <span class="title" id="title">Player</span>
+      <span class="badge" id="muteBadge" hidden>MUTED</span>
+    </div>
+    <div class="actions">
+      <button type="button" id="btnHome" title="YouTube TV home">⌂</button>
+      <button type="button" id="btnReload" title="Reload">↻</button>
+      <button type="button" id="btnMute" title="Mute this player">🔊</button>
+      <button type="button" id="btnTop" title="Always on top">📌</button>
+      <div class="menu-wrap">
+        <button type="button" id="btnMonitor" title="Move to monitor">🖥</button>
+        <div id="monitorMenu" class="monitor-menu hidden"></div>
+      </div>
+      <button type="button" id="btnFs" title="Fullscreen">⛶</button>
+      <button type="button" id="btnMin" title="Minimize">—</button>
+      <button type="button" id="btnClose" class="danger" title="Close player">✕</button>
+    </div>
+  </header>
+  <form id="urlBar" class="url-bar" autocomplete="off">
+    <input id="urlInput" type="text" placeholder="Paste YouTube URL or video ID…" spellcheck="false" />
+    <button type="submit">Open</button>
+  </form>
+  <script src="player.js"></script>
+</body>
+</html>
