@@ -5,8 +5,9 @@
   "description": "NewPlayer — NewTube, NewTV, NewRadio, NewWeather, and New(s) in one Windows app.",
   "main": "src/main/main.js",
   "author": {
-    "name": "NewPlayer",
-    "email": "support@newplayer.local"
+    "name": "Tamaz Karasz",
+    "email": "Usanami101@users.noreply.github.com",
+    "url": "https://github.com/Usanami101"
   },
   "license": "MIT",
   "repository": {
