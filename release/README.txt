@@ -1,22 +1,38 @@
 ══════════════════════════════════════════════════════════════
-  NewPlayer  v2.0
-  NewTube · NewTV · NewRadio · NewWeather · New(s)
+  NewPlayer  v2.1
+  NewTube · NewTV · NewRadio · NewWeather · New(s) · NewFile · NewTalk
 ══════════════════════════════════════════════════════════════
 
-INSTALL
-  Run:  NewPlayer-Setup-2.0.0-x64.exe
+UPDATE (keeps your data)
+  Run:  NewPlayer-Setup-2.1.0-x64.exe
+  Install over your existing NewPlayer install.
+  Settings, favorites, and NewTalk data stay in AppData.
+  Same app id — no need to uninstall first.
 
 
-FIVE MODES IN ONE
------------------
+SEVEN MODES IN ONE
+------------------
   NewTube     YouTube TV experience, Ad Shield, Multi Desk
-  NewTV       Free public IPTV by country & genre (movies,
-              sports, news, kids…). Favorites + custom M3U
-  NewRadio    Worldwide free radio with dials — genre,
-              country, faith, language filters
-  NewWeather  NWS forecast + full-screen TV-style EAS alerts
-              (tray background mode for warnings)
+  NewTV       Free public IPTV by country & genre
+  NewRadio    Worldwide free radio with dials
+  NewWeather  NWS forecast + full-screen EAS alerts
   New(s)      Worldwide headlines from free public RSS
+  NewFile     Smart file manager — sense & auto-organize
+  NewTalk     Accounts, servers, messaging (no host servers)
+
+
+NEWFILE
+-------
+  Browse drives/folders, sense file types, find duplicates,
+  search, and auto-organize into _NewFile_Organized.
+
+
+NEWTALK
+-------
+  Create a NewPlayer account on this device.
+  Join public topic rooms or create private servers with
+  invite codes. Messages are local-first; optional peer sync
+  when online. You do not need to run any server.
 
 
 FIRST LAUNCH
@@ -25,24 +41,10 @@ FIRST LAUNCH
   Optional: "Remember my choice next time".
 
 
-NEWRADIO NOTES
---------------
-  Stations are free public internet radio (Radio Browser).
-  Not a store of copyrighted albums — live streams worldwide.
-
-
-NEWWEATHER NOTES
+SHORTCUTS (home)
 ----------------
-  Uses the US National Weather Service (weather.gov).
-  Severe alerts can take over the screen with EAS tones + text.
+  1 NewTube  2 NewTV  3 NewRadio  4 NewWeather
+  5 New(s)   6 NewFile  7 NewTalk
 
 
-SHORTCUTS (NewTube mode)
-------------------------
-  Ctrl+,              Settings
-  Ctrl+Shift+N        Multi player window
-  Ctrl+Shift+M        Multi Desk
-  F11                 Fullscreen
-
-
-══════════════════════════════════════════════════════════════
+https://github.com/Usanami101/NewPlayer

@@ -39,21 +39,33 @@ for (const file of fs.readdirSync(dist)) {
   }
 }
 
-// Ensure README exists
-const readmeSrc = path.join(out, 'README.txt');
-if (!fs.existsSync(readmeSrc)) {
-  fs.writeFileSync(
-    readmeSrc,
-    'Run NewTube-Setup-*.exe to install NewTube professionally.\r\n',
-    'utf8'
-  );
-}
+const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const ver = pkg.version;
+
+// Always refresh release README for the current version
+fs.writeFileSync(
+  path.join(out, 'README.txt'),
+  [
+    '══════════════════════════════════════════════════════════════',
+    `  NewPlayer  v${ver}`,
+    '  NewTube · NewTV · NewRadio · NewWeather · New(s) · NewFile · NewTalk',
+    '══════════════════════════════════════════════════════════════',
+    '',
+    'UPDATE (keeps your data)',
+    `  Run:  NewPlayer-Setup-${ver}-x64.exe`,
+    '  Install over your existing NewPlayer install.',
+    '  Settings, favorites, and NewTalk data stay in AppData.',
+    '',
+    'https://github.com/Usanami101/NewPlayer',
+    '',
+  ].join('\r\n'),
+  'utf8'
+);
 
 // Write a simple version stamp
-const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 fs.writeFileSync(
   path.join(out, 'VERSION.txt'),
-  `NewTube ${pkg.version}\r\nBuilt: ${new Date().toISOString()}\r\n\r\n` +
+  `NewPlayer ${ver}\r\nBuilt: ${new Date().toISOString()}\r\n\r\n` +
     found.map((f) => `${f.label}: ${f.file} (${f.mb} MB)`).join('\r\n') +
     '\r\n',
   'utf8'
