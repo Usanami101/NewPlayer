@@ -1,8 +1,8 @@
 {
   "name": "newplayer",
   "productName": "NewPlayer",
-  "version": "2.0.0",
-  "description": "NewPlayer — NewTube, NewTV, NewRadio, NewWeather, and New(s) in one Windows app.",
+  "version": "2.1.0",
+  "description": "NewPlayer — NewTube, NewTV, NewRadio, NewWeather, New(s), NewFile, and NewTalk in one Windows app.",
   "main": "src/main/main.js",
   "author": {
     "name": "Tamaz Karasz",
@@ -24,10 +24,14 @@
     "newtv",
     "newradio",
     "newweather",
+    "newfile",
+    "newtalk",
     "electron",
     "youtube-tv",
     "iptv",
     "radio",
+    "file-manager",
+    "messaging",
     "nws",
     "windows"
   ],
@@ -63,11 +67,15 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         },
         {
           "target": "portable",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "icon": "build/icon.ico",
@@ -114,6 +122,7 @@
   },
   "dependencies": {
     "electron-store": "^8.2.0",
+    "gun": "^0.2020.1241",
     "hls.js": "^1.5.17"
   }
 }

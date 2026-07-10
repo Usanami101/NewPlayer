@@ -2,6 +2,17 @@
 
 All notable changes to NewPlayer are documented here.
 
+## [2.1.0] — 2026-07-10
+
+### Added
+- **NewFile** — high-quality file manager: browse drives/folders, smart *Sense* classification, duplicate detection, search, trash/rename/open, and **Auto-organize** into `_NewFile_Organized` categories
+- **NewTalk** — NewPlayer accounts, private servers (invite codes), public topic rooms (Welcome, Gaming, Tech, Music, Movies, Random, Help), local-first messaging with optional peer sync via public Gun relays (no developer-hosted servers)
+
+### Update notes (user data safe)
+- Same `appId` (`com.newplayer.app`) and settings store (`newtube-settings`) — **install over 2.0.0 to update; settings, favorites, and window prefs are kept**
+- Installer keeps `deleteAppDataOnUninstall: false` and the same NSIS GUID
+- NewTalk data lives under `%APPDATA%/NewPlayer/newtalk/` and survives updates
+
 ## [2.0.0] — 2026-07-09
 
 ### Added

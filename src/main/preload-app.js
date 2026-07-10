@@ -1,5 +1,5 @@
 /**
- * Unified preload for NewPlayer (home, NewTube, NewTV, NewRadio, NewWeather, New(s)).
+ * Unified preload for NewPlayer (home, NewTube, NewTV, NewRadio, NewWeather, New(s), NewFile, NewTalk).
  */
 const { contextBridge, ipcRenderer } = require('electron');
 
@@ -18,6 +18,7 @@ const on = (channel, fn) => {
     'multiview-updated',
     'multidesk-open',
     'weather-alert',
+    'talk-message',
   ];
   if (!valid.includes(channel)) return () => {};
   const handler = (_e, data) => fn(data);
@@ -129,4 +130,43 @@ contextBridge.exposeInMainWorld('news', {
   getCatalog: () => ipcRenderer.invoke('news:catalog'),
   getHeadlines: (opts) => ipcRenderer.invoke('news:headlines', opts || {}),
   openLink: (url) => ipcRenderer.invoke('news:open', url),
+});
+
+contextBridge.exposeInMainWorld('newfile', {
+  goHome: () => ipcRenderer.invoke('app:enterMode', 'home'),
+  roots: () => ipcRenderer.invoke('file:roots'),
+  list: (dirPath) => ipcRenderer.invoke('file:list', dirPath),
+  sense: (dirPath) => ipcRenderer.invoke('file:sense', dirPath),
+  organize: (dirPath, dryRun) => ipcRenderer.invoke('file:organize', dirPath, dryRun === true),
+  search: (dirPath, query) => ipcRenderer.invoke('file:search', dirPath, query),
+  open: (p) => ipcRenderer.invoke('file:open', p),
+  show: (p) => ipcRenderer.invoke('file:show', p),
+  mkdir: (parent, name) => ipcRenderer.invoke('file:mkdir', parent, name),
+  rename: (oldPath, newName) => ipcRenderer.invoke('file:rename', oldPath, newName),
+  remove: (p) => ipcRenderer.invoke('file:remove', p),
+});
+
+contextBridge.exposeInMainWorld('newtalk', {
+  goHome: () => ipcRenderer.invoke('app:enterMode', 'home'),
+  getAccount: () => ipcRenderer.invoke('talk:getAccount'),
+  createAccount: (payload) => ipcRenderer.invoke('talk:createAccount', payload),
+  login: (payload) => ipcRenderer.invoke('talk:login', payload),
+  listPublic: () => ipcRenderer.invoke('talk:listPublic'),
+  listJoined: () => ipcRenderer.invoke('talk:listJoined'),
+  createServer: (payload) => ipcRenderer.invoke('talk:createServer', payload),
+  join: (code) => ipcRenderer.invoke('talk:join', code),
+  getServer: (id) => ipcRenderer.invoke('talk:getServer', id),
+  getMessages: (serverId, channelId) => ipcRenderer.invoke('talk:getMessages', serverId, channelId),
+  send: (serverId, channelId, content) => ipcRenderer.invoke('talk:send', serverId, channelId, content),
+  createChannel: (serverId, name) => ipcRenderer.invoke('talk:createChannel', serverId, name),
+  dataPaths: () => ipcRenderer.invoke('talk:dataPaths'),
+  subscribe: (serverId, channelId, fn) => {
+    ipcRenderer.invoke('talk:subscribe', serverId, channelId);
+    const handler = (_e, msg) => fn(msg);
+    ipcRenderer.on('talk-message', handler);
+    return () => {
+      ipcRenderer.removeListener('talk-message', handler);
+      ipcRenderer.invoke('talk:unsubscribe');
+    };
+  },
 });

@@ -1,5 +1,5 @@
 /**
- * NewPlayer — NewTube · NewTV · NewRadio · NewWeather · New(s)
+ * NewPlayer — NewTube · NewTV · NewRadio · NewWeather · New(s) · NewFile · NewTalk
  */
 const path = require('path');
 const fs = require('fs');
@@ -50,6 +50,8 @@ const weatherSvc = require('./weather-service');
 const weatherAlerts = require('./weather-alerts');
 const easWindow = require('./eas-window');
 const newsSvc = require('./news-service');
+const fileSvc = require('./file-service');
+const talkSvc = require('./talk-service');
 const { CATEGORIES, SETTINGS, COUNT } = require('../settings/catalog');
 
 applyEarlyFlags();
@@ -72,6 +74,7 @@ let lastInjectKey = '';
 let boundsBeforeFullscreen = null;
 let shellInputAttached = false;
 let tvInputAttached = false;
+let talkUnsub = null;
 
 const ICON_PNG = path.join(__dirname, '../../assets/icon.png');
 const ICON_ICO = path.join(__dirname, '../../build/icon.ico');
@@ -375,7 +378,16 @@ function enterMode(mode) {
   if (!mainWindow || mainWindow.isDestroyed()) return false;
   // Alias legacy mode name
   if (mode === 'newmusi') mode = 'newradio';
-  const next = ['home', 'newtube', 'newtv', 'newradio', 'newweather', 'news'].includes(mode)
+  const next = [
+    'home',
+    'newtube',
+    'newtv',
+    'newradio',
+    'newweather',
+    'news',
+    'newfile',
+    'newtalk',
+  ].includes(mode)
     ? mode
     : 'home';
   currentMode = next;
@@ -383,6 +395,16 @@ function enterMode(mode) {
 
   settingsOpen = false;
   multiDeskOpen = false;
+
+  // Stop NewTalk peer subscriptions when leaving talk
+  if (next !== 'newtalk' && talkUnsub) {
+    try {
+      talkUnsub();
+    } catch {
+      /* ignore */
+    }
+    talkUnsub = null;
+  }
 
   if (next !== 'newtube') {
     detachTvView();
@@ -395,6 +417,8 @@ function enterMode(mode) {
     newradio: 'NewRadio — NewPlayer',
     newweather: 'NewWeather — NewPlayer',
     news: 'New(s) — NewPlayer',
+    newfile: 'NewFile — NewPlayer',
+    newtalk: 'NewTalk — NewPlayer',
   };
   mainWindow.setTitle(titles[next] || 'NewPlayer');
 
@@ -426,6 +450,10 @@ function enterMode(mode) {
     mainWindow.loadFile(path.join(__dirname, '../renderer/newweather.html'));
   } else if (next === 'news') {
     mainWindow.loadFile(path.join(__dirname, '../renderer/news.html'));
+  } else if (next === 'newfile') {
+    mainWindow.loadFile(path.join(__dirname, '../renderer/newfile.html'));
+  } else if (next === 'newtalk') {
+    mainWindow.loadFile(path.join(__dirname, '../renderer/newtalk.html'));
   }
 
   createTray();
@@ -899,6 +927,8 @@ function createTray() {
     { label: 'NewRadio', click: () => { if (mainWindow) { mainWindow.show(); enterMode('newradio'); } } },
     { label: 'NewWeather', click: () => { if (mainWindow) { mainWindow.show(); enterMode('newweather'); } } },
     { label: 'New(s)', click: () => { if (mainWindow) { mainWindow.show(); enterMode('news'); } } },
+    { label: 'NewFile', click: () => { if (mainWindow) { mainWindow.show(); enterMode('newfile'); } } },
+    { label: 'NewTalk', click: () => { if (mainWindow) { mainWindow.show(); enterMode('newtalk'); } } },
     { type: 'separator' },
     {
       label: wxBg ? '✓ NewWeather background + EAS' : 'Enable NewWeather background + EAS',
@@ -1635,6 +1665,66 @@ function setupIpc() {
   ipcMain.handle('news:headlines', async (_e, opts) => newsSvc.getHeadlines(opts || {}));
   ipcMain.handle('news:open', (_e, url) => {
     if (url && /^https?:\/\//i.test(url)) shell.openExternal(url);
+    return true;
+  });
+
+  // ── NewFile ──────────────────────────────────────────────
+  ipcMain.handle('file:roots', () => fileSvc.roots());
+  ipcMain.handle('file:list', async (_e, dirPath) => fileSvc.listDir(dirPath));
+  ipcMain.handle('file:sense', async (_e, dirPath) => fileSvc.senseFolder(dirPath));
+  ipcMain.handle('file:organize', async (_e, dirPath, dryRun) =>
+    fileSvc.applyOrganize(dirPath, { dryRun: dryRun === true })
+  );
+  ipcMain.handle('file:search', async (_e, dirPath, query) => fileSvc.searchFiles(dirPath, query));
+  ipcMain.handle('file:open', async (_e, p) => fileSvc.openPath(p));
+  ipcMain.handle('file:show', async (_e, p) => fileSvc.showInFolder(p));
+  ipcMain.handle('file:mkdir', async (_e, parent, name) => fileSvc.createFolder(parent, name));
+  ipcMain.handle('file:rename', async (_e, oldPath, newName) => fileSvc.renamePath(oldPath, newName));
+  ipcMain.handle('file:remove', async (_e, p) => fileSvc.deletePath(p));
+
+  // ── NewTalk (local + optional Gun public peers) ──────────
+  ipcMain.handle('talk:getAccount', () => talkSvc.getAccount());
+  ipcMain.handle('talk:createAccount', (_e, payload) => talkSvc.createAccount(payload || {}));
+  ipcMain.handle('talk:login', (_e, payload) => talkSvc.login(payload || {}));
+  ipcMain.handle('talk:listPublic', () => talkSvc.listPublicServers());
+  ipcMain.handle('talk:listJoined', () => talkSvc.listJoinedServers());
+  ipcMain.handle('talk:createServer', (_e, payload) => talkSvc.createServer(payload || {}));
+  ipcMain.handle('talk:join', (_e, code) => talkSvc.joinServer(code));
+  ipcMain.handle('talk:getServer', (_e, id) => talkSvc.getServer(id));
+  ipcMain.handle('talk:getMessages', (_e, serverId, channelId) =>
+    talkSvc.getMessages(serverId, channelId)
+  );
+  ipcMain.handle('talk:send', (_e, serverId, channelId, content) =>
+    talkSvc.sendMessage(serverId, channelId, content)
+  );
+  ipcMain.handle('talk:createChannel', (_e, serverId, name) => talkSvc.createChannel(serverId, name));
+  ipcMain.handle('talk:dataPaths', () => talkSvc.dataPaths());
+  ipcMain.handle('talk:subscribe', (_e, serverId, channelId) => {
+    if (talkUnsub) {
+      try {
+        talkUnsub();
+      } catch {
+        /* ignore */
+      }
+      talkUnsub = null;
+    }
+    talkSvc.initGun();
+    talkUnsub = talkSvc.pullGunMessages(serverId, channelId, (msg) => {
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send('talk-message', msg);
+      }
+    });
+    return true;
+  });
+  ipcMain.handle('talk:unsubscribe', () => {
+    if (talkUnsub) {
+      try {
+        talkUnsub();
+      } catch {
+        /* ignore */
+      }
+      talkUnsub = null;
+    }
     return true;
   });
 

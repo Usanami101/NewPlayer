@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:;" />
+  <title>NewFile — NewPlayer</title>
+  <link rel="stylesheet" href="newfile.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="nav">
+      <div class="nav-top">
+        <button type="button" class="back" id="btnHome">←</button>
+        <div>
+          <strong>NewFile</strong>
+          <small>Smart file manager</small>
+        </div>
+      </div>
+      <div id="roots" class="roots"></div>
+      <div class="nav-actions">
+        <button type="button" class="btn" id="btnSense">Sense & organize</button>
+        <button type="button" class="btn primary" id="btnApplyOrg" title="Move top-level files into smart folders">Auto-organize</button>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="toolbar">
+        <button type="button" class="icon" id="btnUp" title="Up">↑</button>
+        <button type="button" class="icon" id="btnRefresh" title="Refresh">↻</button>
+        <input id="pathBar" type="text" spellcheck="false" />
+        <input id="search" type="search" placeholder="Search here…" />
+      </header>
+      <div class="content">
+        <section class="list-pane">
+          <div class="list-head">
+            <span id="itemCount">0 items</span>
+            <div class="view-tabs">
+              <button type="button" class="chip active" data-filter="all">All</button>
+              <button type="button" class="chip" data-filter="folders">Folders</button>
+              <button type="button" class="chip" data-filter="images">Images</button>
+              <button type="button" class="chip" data-filter="videos">Videos</button>
+              <button type="button" class="chip" data-filter="audio">Audio</button>
+              <button type="button" class="chip" data-filter="documents">Docs</button>
+              <button type="button" class="chip" data-filter="code">Code</button>
+            </div>
+          </div>
+          <div id="fileList" class="file-list"></div>
+        </section>
+        <section class="sense-pane" id="sensePane">
+          <h3>Sense</h3>
+          <p class="hint">NewFile scans this folder to classify, find duplicates, and plan perfect organization.</p>
+          <div id="senseStats" class="sense-stats"></div>
+          <h4>Recent</h4>
+          <div id="senseRecent" class="mini-list"></div>
+          <h4>Possible duplicates</h4>
+          <div id="senseDupes" class="mini-list"></div>
+          <h4>Largest files</h4>
+          <div id="senseLarge" class="mini-list"></div>
+        </section>
+      </div>
+      <footer class="status" id="status">Ready</footer>
+    </main>
+  </div>
+  <script src="newfile.js"></script>
+</body>
+</html>

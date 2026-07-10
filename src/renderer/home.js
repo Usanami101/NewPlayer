@@ -31,13 +31,15 @@
     window.newplayer.openSettings?.();
   });
 
-  // Keyboard 1–4
+  // Keyboard 1–7
   window.addEventListener('keydown', (e) => {
     if (e.key === '1') openMode('newtube');
     if (e.key === '2') openMode('newtv');
     if (e.key === '3') openMode('newradio');
     if (e.key === '4') openMode('newweather');
     if (e.key === '5') openMode('news');
+    if (e.key === '6') openMode('newfile');
+    if (e.key === '7') openMode('newtalk');
   });
 
   boot();

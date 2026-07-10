@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:;" />
+  <title>NewTalk — NewPlayer</title>
+  <link rel="stylesheet" href="newtalk.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Auth gate -->
+    <section class="auth" id="authView">
+      <div class="auth-card">
+        <div class="auth-mark">💬</div>
+        <h1>NewTalk</h1>
+        <p class="sub">Create a NewPlayer account. Chat on public topics or your own servers — no developer servers required.</p>
+        <div class="tabs">
+          <button type="button" class="tab active" data-tab="create">Create account</button>
+          <button type="button" class="tab" data-tab="login">Login</button>
+        </div>
+        <form id="formCreate" class="auth-form">
+          <label>Username<input name="username" required minlength="3" autocomplete="username" placeholder="coolplayer" /></label>
+          <label>Display name<input name="displayName" maxlength="32" placeholder="Cool Player" /></label>
+          <label>Password<input name="password" type="password" required minlength="4" autocomplete="new-password" /></label>
+          <button type="submit" class="btn primary">Create NewPlayer account</button>
+        </form>
+        <form id="formLogin" class="auth-form hidden">
+          <label>Username<input name="username" required autocomplete="username" /></label>
+          <label>Password<input name="password" type="password" required autocomplete="current-password" /></label>
+          <button type="submit" class="btn primary">Login on this device</button>
+        </form>
+        <p class="auth-err" id="authErr"></p>
+        <p class="auth-hint">Account &amp; messages stay in your NewPlayer data folder. Updates never wipe them. Public chat syncs peer-to-peer when online.</p>
+        <button type="button" class="link" id="btnAuthHome">← Back to home</button>
+      </div>
+    </section>
+
+    <!-- Main chat -->
+    <section class="chat hidden" id="chatView">
+      <aside class="servers">
+        <button type="button" class="back" id="btnHome" title="Home">←</button>
+        <div class="user-pill" id="userPill"></div>
+        <div class="sec-label">Your servers</div>
+        <div id="serverList" class="server-list"></div>
+        <button type="button" class="btn sm" id="btnCreateSrv">+ Create server</button>
+        <button type="button" class="btn sm ghost" id="btnJoinInvite">Join invite</button>
+        <div class="sec-label">Public topics</div>
+        <div id="publicList" class="server-list"></div>
+      </aside>
+      <aside class="channels">
+        <div class="ch-head">
+          <strong id="srvName">Select a server</strong>
+          <small id="srvDesc"></small>
+        </div>
+        <div id="channelList" class="channel-list"></div>
+        <div class="ch-actions">
+          <button type="button" class="btn sm" id="btnAddChannel">+ Channel</button>
+          <button type="button" class="btn sm ghost" id="btnInvite" title="Copy invite">Invite</button>
+        </div>
+      </aside>
+      <main class="messages-pane">
+        <header class="msg-head">
+          <div>
+            <h2 id="chTitle"># general</h2>
+            <p id="chTopic">Messages sync locally and via public peers when available</p>
+          </div>
+          <span class="badge" id="syncBadge">local</span>
+        </header>
+        <div id="messages" class="messages"></div>
+        <form id="composer" class="composer">
+          <input id="msgInput" type="text" maxlength="2000" placeholder="Message… (Enter to send)" autocomplete="off" disabled />
+          <button type="submit" class="btn primary" id="btnSend" disabled>Send</button>
+        </form>
+      </main>
+    </section>
+  </div>
+  <script src="newtalk.js"></script>
+</body>
+</html>

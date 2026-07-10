@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/social-preview.png" alt="NewPlayer — five apps in one" width="100%" />
+  <img src="docs/social-preview.png" alt="NewPlayer — apps in one" width="100%" />
 </p>
 
 <p align="center">
@@ -9,8 +9,8 @@
 <h1 align="center">NewPlayer</h1>
 
 <p align="center">
-  <strong>Five apps. One Windows desktop player.</strong><br/>
-  NewTube · NewTV · NewRadio · NewWeather · New(s)
+  <strong>Seven apps. One Windows desktop player.</strong><br/>
+  NewTube · NewTV · NewRadio · NewWeather · New(s) · NewFile · NewTalk
 </p>
 
 <p align="center">
@@ -51,6 +51,15 @@ Worldwide **free internet radio** with a wood-cabinet dial UI. Filter by **genre
 
 ### New(s)
 **Worldwide headlines** from free public RSS sources (BBC, Guardian, Al Jazeera, NPR, tech, sports, science…). Filter by region/source and open stories in your browser.
+
+### NewFile
+A **smart file manager** that goes beyond Explorer: sense/classify files, surface recent & large items, flag likely duplicates, search deep, and **auto-organize** top-level files into clean category folders (`_NewFile_Organized`). Never touches NewPlayer app settings.
+
+### NewTalk
+**Accounts + messaging** for NewPlayer users. Create an account on-device, join **public topic servers** (gaming, tech, music…), or create private servers with invite codes. Messages are **local-first** (survive app updates) and can sync with other users over public peer relays — **you don’t need to run any server**.
+
+### Updating (keeps your data)
+Install the new **Setup** over your existing NewPlayer install (same app id). Settings, favorites, NewTalk account/messages, and window layout stay in `%APPDATA%`. Uninstall does **not** wipe app data by default.
 
 ---
 
